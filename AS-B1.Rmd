@@ -1,0 +1,107 @@
+---
+title: "AS-B1"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Loading libraries 
+
+We will start by loading the necessary libraries for this assignment 
+
+```{r}
+library(dplyr) 
+library(tidyverse)
+library(datateachr) # this provides the dataset used to test our functions 
+library(testthat) # this is used to test our functions
+```
+
+# Making a Function and Documenting
+This function will return the difference of the average height (per sex) to an inputed height (in cm).
+
+```{r}
+#' @tite Average Height Difference Function 
+#'  
+#' @description The `Avg_height_diff` function calculates the absolute difference of the average adult height per sex (178.1 cm for Canadian men & 164.7 cm for Canadian women) to an inputted height (in cm).
+#'  
+#'
+#' @param height Height of person (in cm). I named this paramater as height because that is name the input. 
+#' @param male Variable to indicate the sex of the inputted height. I named this paramater as male because that corresponds to the input. 
+#'
+#' @return Absolute value of the difference of the average height and the inputted height (in cm)
+#' 
+#'
+#' @examples 
+#' Avg_height_diff(181, male = TRUE)
+#' Avg_height_diff(114, male = FALSE)
+#' 
+Avg_height_diff <- function(height, male = TRUE){
+  if(!is.numeric(height)) { 
+    stop('This function only works for numeric input!\n',
+         'You have provided an object of class: ', class(height)[1])
+  }
+  if(is.na(height)) { 
+    stop('This function only works for numeric input!\n',
+         'You have provided an NA value ')
+  }
+  if(male == TRUE) {
+    result <- abs(178.1 - height)
+    paste("With the average Canadian male height at 178.1 cm, you are", round(result, 2), "cm different than the average.")
+  } else {
+    result2 <- abs(164.7 - height)
+    paste("With the average Canadian female height at 164.7 cm, you are", round(result2, 2),  "cm different than the average.")
+  }
+}
+
+```
+
+# Function Examples 
+```{r, error = TRUE}
+
+# We can see that inputting the same number will provide different answers depending on the sex
+Avg_height_diff(160, male = TRUE)
+Avg_height_diff(160, male = FALSE)
+
+
+# Attempting to input non-numeric values will return an error
+Avg_height_diff("cow", male = TRUE)
+
+```
+
+# Testing the function 
+Now we can use the `testthat` package to run some tests on the function to ensure it works. 
+We will be using the *cancer_sample* and *apt_buildings* dataset from the `datateachr` package. 
+```{r}
+print(cancer_sample)
+print(apt_buildings)
+```
+
+
+
+
+
+## Test 1
+Our first test checks to see if an error message will be displayed when a non-numeric variable is used for the *height* parameter. We will be using the *diagnosis* column from the *cancer_sample* dataset as our non-numeric variable.
+```{r}
+test_that("Function shows an error if non-numerical value is used as the height", {
+  expect_error(Avg_height_diff(cancer_sample$diagnosis, male= FALSE))
+})
+```
+
+## Test 2 
+Our second test checks to see if an error message will be displayed when an NA value is used for the *height* parameter. We will be using *row 6* of the *no_barrier_free_accessible_units* column from the *apt_buildings* dataset to extract an NA value. 
+```{r}
+test_that("Function shows an error if NA value is used as the height", {
+  expect_error(Avg_height_diff(apt_buildings$no_barrier_free_accessible_units[6], male = TRUE))
+})
+```
+
+## Test 3 
+Our final test will ensure that the class for a given singular output is a *character*. We will be using *row 1* of the *radius_mean* column from the *cancer_sample* dataset to extract a *charachter* output. 
+```{r}
+test_that("Function produces a output with a charachter class type", {
+  expect_true(is.character(Avg_height_diff(cancer_sample$radius_mean[1], male = TRUE)))
+})
+```
