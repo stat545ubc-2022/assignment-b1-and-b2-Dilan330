@@ -23,16 +23,10 @@ This function will return the difference of the average height (per sex) to an i
 
 ```{r}
 #' @tite Average Height Difference Function 
-#'  
 #' @description The `Avg_height_diff` function calculates the absolute difference of the average adult height per sex (178.1 cm for Canadian men & 164.7 cm for Canadian women) to an inputted height (in cm).
-#'  
-#'
 #' @param height Height of person (in cm). I named this paramater as height because that is name the input. 
 #' @param male Variable to indicate the sex of the inputted height. I named this paramater as male because that corresponds to the input. 
-#'
-#' @return Absolute value of the difference of the average height and the inputted height (in cm)
-#' 
-#'
+#' @return A message (class type: Character) which contains the absolute value of the difference of the average height and the inputted height (in cm)
 #' @examples 
 #' Avg_height_diff(181, male = TRUE)
 #' Avg_height_diff(114, male = FALSE)
