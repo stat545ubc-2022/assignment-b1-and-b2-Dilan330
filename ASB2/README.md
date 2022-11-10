@@ -17,7 +17,7 @@ inputted height (in cm)
 You can install the development version of ASB2 like so:
 
 ``` r
-devtools::install_github("Dilan330/ASB2, ref="0.1.0")
+devtools::install_github("Dilan330/assignment-b1-and-b2-Dilan330, ref="0.1.0")
 ```
 
 ## Example
