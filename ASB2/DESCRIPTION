@@ -1,0 +1,16 @@
+Package: ASB2
+Title: Average Height Difference  
+Version: 0.1.0
+Authors@R: 
+    person("Dilan", "Sunthareswaran", email= "d.sunthareswaran@oceans.ubc.ca", role = c("aut", "cre"))
+Description: The goal of ASB2 is to provide information regarding the average adult height (per sex) and compare it to inputted heights. This package contains a function which displays the average adult height (for the selected sex) and calculates the absolute difference between it and an inputted height (in cm).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    datateachr
+Config/testthat/edition: 3
